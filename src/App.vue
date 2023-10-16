@@ -1,16 +1,26 @@
 <template>
   <router-view />
 
-  <Loading />
+  <Loading v-if="IsLoading" />
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 // loading 화면 컴포넌트 import
 import Loading from "./components/Loading.vue";
 export default {
   name: 'App',
   components: {
     Loading,
+  },
+  computed: {
+    ...mapState('MovieModule',['IsLoading']),
+  },
+  methods: {
+    ...mapActions('MovieModule',['fetchSearchMovie']),
+  },
+  mounted() {
+    this.fetchSearchMovie();
   }
 }
 </script>
