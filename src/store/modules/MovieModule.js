@@ -1,11 +1,12 @@
 import axios from "axios";
 
 const key = process.env.VUE_APP_API_KEY;
-
+const apiUrl = 'https://api.themoviedb.org/3/movie/';
 const state = {
     PopularMovies: [],
     TopRatedMovies: [],
     UpcomingMovies: [],
+    NowPlayingMovies: [],
     MainRandomVisualBg: "",
     SearchMovies: [],
     MovieId: "",
@@ -15,10 +16,13 @@ const state = {
 
 const mutations = {
     //메인화면 Movies 셋팅
-    setMainMovies(state, {popularData, topRatedData, upcomingData}) {
+    setMainMovies(state, {popularData, topRatedData, upcomingData, nowPlayingData}) {
         state.PopularMovies = popularData;
         state.TopRatedMovies = topRatedData;
         state.UpcomingMovies = upcomingData;
+        state.NowPlayingMovies = nowPlayingData;
+    },
+
     //메인화면 visual randomBg state셋팅
     setMainVisualRandomBg(state,randomBgData) {
         state.MainRandomVisualBg = randomBgData;
@@ -32,19 +36,39 @@ const mutations = {
 
 const actions = {
 
-    //Main화면에 노출될 Moviex 데이터 Main화면 컨텐츠 state에 기입
+    //Main화면에 노출될 Movie 데이터 Main화면 컨텐츠 state에 기입
     async fetchMainMovies({commit}) {
         try {
-            const popularResponce = await axios.get('https://api.themoviedb.org/3/movie/popular');
-            const topRatedResponce = await axios.get('https://api.themoviedb.org/3/movie/top_rated');
-            const upcomingResponce = await axios.get('https://api.themoviedb.org/3/movie/upcoming');
+            const popularResponce = await axios.get(`${apiUrl}/popular`,{
+                params: {
+                    api_key: key,
+                }
+            });
+            const topRatedResponce = await axios.get(`${apiUrl}/top_rated`, {
+                params: {
+                    api_key: key,
+                }
+            });
+            const upcomingResponce = await axios.get(`${apiUrl}/upcoming`, {
+                params: {
+                    api_key: key,
+                }
+            });
+
+            const nowPlayingResponce = await axios.get(`${apiUrl}/now_playing`,{
+                params: {
+                    api_key: key,
+                }
+            });
+
 
             commit('setMainMovies',{
                 popularData: popularResponce.data.results,
                 topRatedData: topRatedResponce.data.results,
                 upcomingData: upcomingResponce.data.results,
+                nowPlayingData: nowPlayingResponce.data.results,
             });
-            
+
         } catch (err) {
             console.log(err);
         }
@@ -59,7 +83,7 @@ const actions = {
                 }
             });
 
-            commit('settingMovies',responce.data.results);
+            commit('setSearchMovies',responce.data.results);
         } catch(err) {
             console.log(err);
         }
