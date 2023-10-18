@@ -6,6 +6,7 @@ const state = {
     PopularMovies: [],
     TopRatedMovies: [],
     UpcomingMovies: [],
+    MainRandomVisualBg: "",
     SearchMovies: [],
     MovieId: "",
     SearchQuery: "슬램덩크",
@@ -18,6 +19,9 @@ const mutations = {
         state.PopularMovies = popularData;
         state.TopRatedMovies = topRatedData;
         state.UpcomingMovies = upcomingData;
+    //메인화면 visual randomBg state셋팅
+    setMainVisualRandomBg(state,randomBgData) {
+        state.MainRandomVisualBg = randomBgData;
     },
 
     //검색 Movies 셋팅
