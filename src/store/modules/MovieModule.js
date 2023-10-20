@@ -6,8 +6,8 @@ const state = {
   Genre: "movie",
   PopularMovies: [],
   TopRatedMovies: [],
-  UpcomingMovies: [],
   NowPlayingMovies: [],
+  NowPlayingTrailers: [],
   MainRandomVisualBg: "",
   SearchMovies: [],
   MovieId: "",
@@ -20,20 +20,21 @@ const mutations = {
   setGenre(state, payload) {
     state.Genre = payload;
   },
-  //메인화면 Movies 셋팅
-  setMainMovies(
-    state,
-    { popularData, topRatedData, upcomingData, nowPlayingData }
-  ) {
+  //메인화면 Movies Data 셋팅
+  setMainMovies( state, { nowPlayingData, topRatedData, popularData}) {
+    state.NowPlayingMovies = nowPlayingData;
     state.PopularMovies = popularData;
     state.TopRatedMovies = topRatedData;
-    state.UpcomingMovies = upcomingData;
-    state.NowPlayingMovies = nowPlayingData;
   },
 
   //메인화면 visual randomBg state셋팅
   setMainVisualRandomBg(state, randomBgData) {
     state.MainRandomVisualBg = randomBgData;
+  },
+
+  //메인 최신상영작 영화 예고편 셋팅 
+  setMainMovieTrailers(state,trailersData) {
+    state.NowPlayingTrailers = trailersData;
   },
 
   //검색 Movies 셋팅
@@ -46,42 +47,46 @@ const actions = {
   //Main화면에 최초 노출될 Movie 데이터 Main화면 컨텐츠 state에 기입
   async fetchMainMovies({ commit }) {
     try {
-      const popularResponce = await axios.get(`${apiUrl}/movie/popular`, {
+      
+      const nowPlayingResponse = await axios.get(`${apiUrl}/movie/now_playing`,{
         params: {
           api_key: key,
           page: "1",
         },
-      });
-      const topRatedResponce = await axios.get(`${apiUrl}/movie/top_rated`, {
-        params: {
-          api_key: key,
-          page: "1",
-        },
-      });
-      const upcomingResponce = await axios.get(`${apiUrl}/movie/upcoming`, {
+      }
+    );
+
+      const popularResponse = await axios.get(`${apiUrl}/movie/popular`, {
         params: {
           api_key: key,
           page: "1",
         },
       });
 
-      const nowPlayingResponce = await axios.get(
-        `${apiUrl}/movie/now_playing`,
-        {
-          params: {
-            api_key: key,
-            page: "1",
-          },
-        }
-      );
+      const topRatedResponse = await axios.get(`${apiUrl}/movie/top_rated`, {
+        params: {
+          api_key: key,
+          page: "1",
+        },
+      });
 
+      //메인 영화 컨텐츠 최초 리스트 출력
       commit("setMainMovies", {
-        popularData: popularResponce.data.results,
-        topRatedData: topRatedResponce.data.results,
-        upcomingData: upcomingResponce.data.results,
-        nowPlayingData: nowPlayingResponce.data.results,
+        nowPlayingData: nowPlayingResponse.data.results,
+        topRatedData: topRatedResponse.data.results,
+        popularData: popularResponse.data.results,
       });
-      console.log(popularResponce.data.results);
+
+
+      // 최신상영작 영화 예고편 리스트 출력
+      const nowPlayingTrailerResponse = await axios.get(`${apiUrl}/movie/${state.NowPlayingMovies[0].id}/videos`, {
+        params: {
+          api_key: key,
+        },
+      });
+
+      commit('setMainMovieTrailers',nowPlayingTrailerResponse);
+
     } catch (err) {
       console.log(err);
     }
@@ -89,6 +94,7 @@ const actions = {
 
   //Main 화면 장르변경 후 API 통신 actions - 추가작업 시작점
   async fetchGenreUpdate() {},
+
   //SearchMovie 데이터 SearchMovies state에 기입
   async fetchSearchMovie({ state, commit }) {
     try {
