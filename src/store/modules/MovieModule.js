@@ -8,6 +8,7 @@ const state = {
   TopRatedMovies: [],
   NowPlayingMovies: [],
   NowPlayingTrailers: [],
+  ActiveTrailerIdx: 0,
   MainRandomVisualBg: "",
   SearchMovies: [],
   MovieId: "",
@@ -32,9 +33,14 @@ const mutations = {
     state.MainRandomVisualBg = randomBgData;
   },
 
-  //메인 최신상영작 영화 예고편 셋팅 
+  //메인 영화 예고편 데이터 셋팅 
   setMainMovieTrailers(state,trailersData) {
     state.NowPlayingTrailers = trailersData;
+  },
+
+  //메인 영화 예고편 상단 영상 idx state변경
+  changeMainMovieTrailer(state,idx) {
+    state.ActiveTrailerIdx = idx;
   },
 
   //검색 Movies 셋팅
@@ -52,6 +58,7 @@ const actions = {
         params: {
           api_key: key,
           page: "1",
+          language: "ko",
         },
       }
     );
@@ -60,6 +67,7 @@ const actions = {
         params: {
           api_key: key,
           page: "1",
+          language: "ko",
         },
       });
 
@@ -67,6 +75,7 @@ const actions = {
         params: {
           api_key: key,
           page: "1",
+          language: "ko",
         },
       });
 
@@ -78,22 +87,24 @@ const actions = {
       });
 
 
-      // 최신상영작 영화 예고편 리스트 출력
+      // 최신상영작 영화 예고편 비디오 리스트 출력
       const nowPlayingTrailerResponse = await axios.get(`${apiUrl}/movie/${state.NowPlayingMovies[0].id}/videos`, {
         params: {
           api_key: key,
         },
       });
 
-      commit('setMainMovieTrailers',nowPlayingTrailerResponse);
-
+      commit('setMainMovieTrailers',nowPlayingTrailerResponse.data.results);
+      console.log(nowPlayingTrailerResponse.data.results);
     } catch (err) {
       console.log(err);
     }
   },
 
   //Main 화면 장르변경 후 API 통신 actions - 추가작업 시작점
-  async fetchGenreUpdate() {},
+  async fetchGenreUpdate() {
+    
+  },
 
   //SearchMovie 데이터 SearchMovies state에 기입
   async fetchSearchMovie({ state, commit }) {

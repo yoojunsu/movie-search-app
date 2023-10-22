@@ -1,0 +1,247 @@
+.main-search-section {
+    background-color: #00baff;
+    background-size: cover;
+    background-position: center;
+    max-width: 1300px;
+    height: 350px;
+    margin: 0 auto;
+    transition: background-image 0.3s;
+  
+    .section-inner {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      width: 100%;
+      height: 100%;
+      padding: 0 25px;
+    }
+  
+    h2,
+    h3 {
+      color: #fff;
+    }
+  
+    .tit-wrap {
+      margin-bottom: 30px;
+  
+      h2 {
+        font-size: 4rem;
+      }
+  
+      h3 {
+        font-size: 3rem;
+      }
+    }
+  
+    .search-wrap {
+      border-radius: 50px;
+      box-shadow: 0 7px 8px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+  
+      input {
+        padding: 15px 125px 15px 25px;
+        width: 100%;
+      }
+  
+      button {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 242, 0, 1) 0%,
+          rgba(255, 255, 255, 1) 87%
+        );
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        max-width: 100px;
+  
+        i {
+          font-size: 2.3rem;
+        }
+      }
+    }
+  }
+  
+  .content-section {
+    padding: 60px 0;
+  
+  .btn-wrap {
+    display: flex;
+    border: 1px solid #000;
+    border-radius: 50px;
+    max-width: 230px;
+    overflow: hidden;
+  
+    button {
+      font-size: 1.5rem;
+      width: 100%;
+      padding: 7px 0;
+      text-align: center;
+  
+      &.active {
+        background-color: #00baff;
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+  }
+  
+    .card {
+    min-width: 200px;
+    text-align: center;
+  
+    .info-wrap {
+      h4 {
+        font-size: 1.6rem;
+        letter-spacing: -0.05em;
+        word-break: keep-all;
+        margin: 20px 0 10px;
+      }
+  
+      span {
+        font-size: 1.6rem;
+        color: #ccc;
+      }
+    }
+  
+    .vote-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      border: 2px solid #00baff;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      position: absolute;
+      top: -15px;
+      right: -10px;
+  
+      b {
+        color: #fff;
+        font-size: 1.3rem;
+      }
+    }
+  }
+  }
+  
+  .trailer-section {
+    padding: 50px 0;
+    background-size: cover;
+    background-position: center;
+    
+    h3,h4 {
+      color: #fff;
+      text-align: center;
+    }
+  
+    h3 {
+      font-size: 2.5rem;
+      font-weight: 400;
+      margin-bottom: 15px;
+    }
+  
+    h4 {
+      font-size: 4.5rem;
+      margin-bottom: 35px;
+    }
+  
+    .main-video-content {
+      text-align: center;
+  
+      iframe {
+        width: 100%;
+        max-width: 750px;
+        height: 450px;
+        margin-bottom: 15px;
+      }
+      
+      h5 {
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 600;
+      }
+    }
+  
+    .sub-video-list {
+      display: flex;
+      gap: 0 20px;
+      padding: 0 25px;
+      .card {
+        min-width: 300px;
+        cursor: pointer;
+  
+        .thumb {
+          width: 100%;
+          height: 0;
+          padding-bottom: calc(200 / 300 * 100%);
+          margin-bottom: 10px;
+          position: relative;
+  
+          &::after {
+            content: "▶️";
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0 ,0.5);
+            color: #fff;
+            font-size: 4rem;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+  
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+        }
+  
+        h5 {
+          color: #fff;
+          font-size: 1.8rem;
+          font-weight: 500;
+        }
+  
+        &.active {
+          .thumb::after {display: none;}
+        }
+      }
+    }
+  }
+  
+  .section-tit {
+    font-size: 4rem;
+    color: #000;
+  }
+  
+  .poster-wrap {
+    width: 100%;
+    height: 0;
+    padding-bottom: calc(270 / 200 * 100%);
+    position: relative;
+  
+    img {
+      border-radius: 20px;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+  
