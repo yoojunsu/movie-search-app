@@ -3,7 +3,9 @@ import axios from "axios";
 const key = process.env.VUE_APP_API_KEY;
 const apiUrl = "https://api.themoviedb.org/3";
 const state = {
-  Genre: "movie",
+  PopularGenre: "movie",
+  TopRatedGenre: "movie",
+  MovieType: "",
   PopularMovies: [],
   TopRatedMovies: [],
   NowPlayingMovies: [],
@@ -17,15 +19,33 @@ const state = {
 };
 
 const mutations = {
-  // 최초 장르 셋팅
-  setGenre(state, payload) {
-    state.Genre = payload;
+  // 장르 셋팅
+  setPopularGenre(state, payload) {
+    state.PopularGenre = payload;
   },
+
+  setTopRatedGenre(state,payload) {
+    state.TopRatedGenre = payload;
+  },
+
+  setMovieType(state,payload){
+    state.MovieType = payload;
+  },
+
   //메인화면 Movies Data 셋팅
   setMainMovies( state, { nowPlayingData, topRatedData, popularData}) {
     state.NowPlayingMovies = nowPlayingData;
     state.PopularMovies = popularData;
     state.TopRatedMovies = topRatedData;
+  },
+
+  //버튼 클릭에 따른 메인 무비 장르 데이터 변경하는 muatations
+  setMainMovieListUpdate(state,payload) {
+    if(state.MovieType === "top_rated") {
+      state.TopRatedMovies = payload;
+    } else if(state.MovieType === "popular") {
+      state.PopularMovies = payload;
+    }
   },
 
   //메인화면 visual randomBg state셋팅
@@ -95,16 +115,36 @@ const actions = {
       });
 
       commit('setMainMovieTrailers',nowPlayingTrailerResponse.data.results);
-      console.log(nowPlayingTrailerResponse.data.results);
     } catch (err) {
       console.log(err);
     }
   },
 
-  //Main 화면 장르변경 후 API 통신 actions - 추가작업 시작점
-  async fetchGenreUpdate() {
-    
+  //Main Popular 장르 업데이트 후 API 통신 actions
+  async fetchPopularGenreUpdate({state, commit}) {
+      const updateResponse = await axios.get(`${apiUrl}/${state.PopularGenre}/${state.MovieType}`,{
+        params: {
+          api_key: key,
+          page: "1",
+          language: "ko",
+        }
+      });
+
+      commit("setMainMovieListUpdate",updateResponse.data.results);
   },
+
+  //Main TopRated 장르 업데이트 후 API 통신 actions
+  async fetchTopRatedGenreUpdate({state, commit}) {
+    const updateResponse = await axios.get(`${apiUrl}/${state.TopRatedGenre}/${state.MovieType}`,{
+      params: {
+        api_key: key,
+        page: "1",
+        language: "ko",
+      }
+    });
+
+    commit("setMainMovieListUpdate",updateResponse.data.results);
+},
 
   //SearchMovie 데이터 SearchMovies state에 기입
   async fetchSearchMovie({ state, commit }) {
