@@ -23,31 +23,11 @@
 </template>
 
 <script>
-import { mapMutations, mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 export default {
     name: "MainVisual",
     computed: {
-        ...mapState('MovieModule',["PopularMovies","MainRandomVisualBg"]),
+        ...mapState('MovieModule',["MainRandomVisualBg"]),
     },
-    methods: {
-        ...mapMutations('MovieModule',['setMainVisualRandomBg']),
-        ...mapActions('MovieModule',['fetchMainMovies']),
-        
-        //메인 최상단 비주얼 bg 영화 backdrop random 출력
-        async randomVisualBg() {
-            await this.fetchMainMovies();
-            const mainRandomVisualImagePath = this.PopularMovies[Math.floor(Math.random() * this.PopularMovies.length)].backdrop_path;
-            const mainRandomVisualImageOptions ="w1920_and_h600_multi_faces_filter(duotone,000,00baff)";
-            const mainRandomVisualImageUrl = `https://image.tmdb.org/t/p/${mainRandomVisualImageOptions}${mainRandomVisualImagePath}`;
-            this.setMainVisualRandomBg(mainRandomVisualImageUrl);
-        },
-    },
-    
-    created() {
-        this.randomVisualBg();
-    }
 }
 </script>
-
-<style scoped lang="scss">
-</style>

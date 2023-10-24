@@ -106,6 +106,11 @@ const actions = {
         popularData: popularResponse.data.results,
       });
 
+      //main random bg 로직
+      const mainRandomVisualImagePath = state.PopularMovies[Math.floor(Math.random() * state.PopularMovies.length)].backdrop_path;
+      const mainRandomVisualImageOptions ="w1920_and_h600_multi_faces_filter(duotone,000,00baff)";
+      const mainRandomVisualImageUrl = `https://image.tmdb.org/t/p/${mainRandomVisualImageOptions}${mainRandomVisualImagePath}`;
+      commit('setMainVisualRandomBg',mainRandomVisualImageUrl)
 
       // 최신상영작 영화 예고편 비디오 리스트 출력
       const nowPlayingTrailerResponse = await axios.get(`${apiUrl}/movie/${state.NowPlayingMovies[0].id}/videos`, {
