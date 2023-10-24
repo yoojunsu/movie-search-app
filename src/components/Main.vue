@@ -1,9 +1,9 @@
 <template>
   <MainVisual />
   <MainNowPlaying />
-  <MainTrending />
   <MainTrailer />
   <MainPopular />
+  <MainTrending />
   <MainTopRated />
 </template>
 

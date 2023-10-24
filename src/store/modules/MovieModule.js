@@ -5,13 +5,12 @@ const apiUrl = "https://api.themoviedb.org/3";
 const state = {
   PopularGenre: "movie",
   TopRatedGenre: "movie",
-  TrendingDays: "days",
   MovieType: "",
   PopularMovies: [],
   TopRatedMovies: [],
   NowPlayingMovies: [],
   NowPlayingTrailers: [],
-  TrendingMovies: [],
+  TrendingPeoples: [],
   ActiveTrailerIdx: 0,
   MainRandomVisualBg: "",
   SearchMovies: [],
@@ -39,7 +38,7 @@ const mutations = {
     state.NowPlayingMovies = nowPlayingData;
     state.PopularMovies = popularData;
     state.TopRatedMovies = topRatedData;
-    state.TrendingMovies = trendingData;
+    state.TrendingPeoples = trendingData;
   },
 
   //버튼 클릭 동작으로 변경된 MovieType에 값에 따른 메인 무비 장르 데이터 변경하는 muatations
@@ -101,7 +100,7 @@ const actions = {
         },
       });
 
-      const trendingResponse = await axios.get(`${apiUrl}/trending/movie/week`,{
+      const trendingResponse = await axios.get(`${apiUrl}/trending/person/week`,{
         params: {
           api_key: key,
           page: "1",
@@ -117,6 +116,8 @@ const actions = {
         popularData: popularResponse.data.results,
         trendingData: trendingResponse.data.results,
       });
+
+      console.log(trendingResponse.data.results);
 
       //main random bg 로직
       const mainRandomVisualImagePath = state.PopularMovies[Math.floor(Math.random() * state.PopularMovies.length)].backdrop_path;
