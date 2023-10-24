@@ -5,11 +5,13 @@ const apiUrl = "https://api.themoviedb.org/3";
 const state = {
   PopularGenre: "movie",
   TopRatedGenre: "movie",
+  TrendingDays: "days",
   MovieType: "",
   PopularMovies: [],
   TopRatedMovies: [],
   NowPlayingMovies: [],
   NowPlayingTrailers: [],
+  TrendingMovies: [],
   ActiveTrailerIdx: 0,
   MainRandomVisualBg: "",
   SearchMovies: [],
@@ -33,13 +35,14 @@ const mutations = {
   },
 
   //메인화면 Movies Data 셋팅
-  setMainMovies( state, { nowPlayingData, topRatedData, popularData}) {
+  setMainMovies( state, { nowPlayingData, topRatedData, popularData, trendingData}) {
     state.NowPlayingMovies = nowPlayingData;
     state.PopularMovies = popularData;
     state.TopRatedMovies = topRatedData;
+    state.TrendingMovies = trendingData;
   },
 
-  //버튼 클릭에 따른 메인 무비 장르 데이터 변경하는 muatations
+  //버튼 클릭 동작으로 변경된 MovieType에 값에 따른 메인 무비 장르 데이터 변경하는 muatations
   setMainMovieListUpdate(state,payload) {
     if(state.MovieType === "top_rated") {
       state.TopRatedMovies = payload;
@@ -71,7 +74,7 @@ const mutations = {
 
 const actions = {
   //Main화면에 최초 노출될 Movie 데이터 Main화면 컨텐츠 state에 기입
-  async fetchMainMovies({ commit }) {
+  async fetchMainMovies({ state, commit }) {
     try {
       
       const nowPlayingResponse = await axios.get(`${apiUrl}/movie/now_playing`,{
@@ -80,8 +83,7 @@ const actions = {
           page: "1",
           language: "ko",
         },
-      }
-    );
+      });
 
       const popularResponse = await axios.get(`${apiUrl}/movie/popular`, {
         params: {
@@ -99,11 +101,21 @@ const actions = {
         },
       });
 
+      const trendingResponse = await axios.get(`${apiUrl}/trending/movie/week`,{
+        params: {
+          api_key: key,
+          page: "1",
+          language: "ko",
+        }
+      });
+
+
       //메인 영화 컨텐츠 최초 리스트 출력
       commit("setMainMovies", {
         nowPlayingData: nowPlayingResponse.data.results,
         topRatedData: topRatedResponse.data.results,
         popularData: popularResponse.data.results,
+        trendingData: trendingResponse.data.results,
       });
 
       //main random bg 로직
