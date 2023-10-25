@@ -1,9 +1,11 @@
 import { createStore } from "vuex";
 import MainModule from "./modules/MainModule";
+import DetailModule from "./modules/DetailModule";
 
 export default createStore({
     modules: {
         MainModule: MainModule,
+        DetailModule: DetailModule,
     },
 
     state() {
