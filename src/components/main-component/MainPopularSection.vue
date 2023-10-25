@@ -48,11 +48,11 @@ import { mapActions, mapMutations, mapState } from 'vuex'
 export default {
     name: "MainPopular",
     computed: {
-        ...mapState('MovieModule',["PopularMovies","PopularGenre"]),
+        ...mapState("MainModule",["PopularMovies","PopularGenre"]),
     },
     methods: {
-        ...mapMutations('MovieModule',["setPopularGenre","setMovieType"]),
-        ...mapActions('MovieModule', ["fetchPopularGenreUpdate"]),
+        ...mapMutations("MainModule",["setPopularGenre","setMovieType"]),
+        ...mapActions("MainModule", ["fetchPopularGenreUpdate"]),
 
         //메인 popular 영화 장르 바꾸는 함수
         async changeMovieGenre(genre,movieType) {
@@ -64,7 +64,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

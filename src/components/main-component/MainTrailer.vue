@@ -43,10 +43,10 @@ import { mapMutations, mapState } from 'vuex'
 export default {
     name: "MainTrailer",
     computed: {
-        ...mapState('MovieModule',["NowPlayingMovies","NowPlayingTrailers","ActiveTrailerIdx"]),
+        ...mapState("MainModule",["NowPlayingMovies","NowPlayingTrailers","ActiveTrailerIdx"]),
     },
     methods: {
-        ...mapMutations('MovieModule',["changeMainMovieTrailer"]),
+        ...mapMutations("MainModule",["changeMainMovieTrailer"]),
     }
 
 }

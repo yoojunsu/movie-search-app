@@ -27,7 +27,7 @@ import { mapState } from 'vuex'
 export default {
     name: "MainVisual",
     computed: {
-        ...mapState('MovieModule',["MainRandomVisualBg"]),
+        ...mapState("MainModule",["MainRandomVisualBg"]),
     },
 }
 </script>

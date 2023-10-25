@@ -28,7 +28,7 @@ import { mapState } from 'vuex'
 export default {
     name: "MainTrending",
     computed: {
-        ...mapState('MovieModule',["TrendingPeoples"]),
+        ...mapState("MainModule",["TrendingPeoples"]),
     },
 }
 </script>

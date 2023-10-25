@@ -44,7 +44,7 @@ import { mapState } from 'vuex'
 export default {
     name: "MainNowPlaying",
     computed: {
-        ...mapState('MovieModule',["NowPlayingMovies",]),
+        ...mapState("MainModule",["NowPlayingMovies",]),
     }
 }
 </script>

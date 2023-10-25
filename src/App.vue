@@ -19,10 +19,10 @@ export default {
     Loading,
   },
   computed: {
-    ...mapState("MovieModule", ["IsLoading"]),
+    ...mapState("MainModule", ["IsLoading"]),
   },
   methods: {
-    ...mapActions("MovieModule", ["fetchSearchMovie"]),
+    ...mapActions("MainModule", ["fetchSearchMovie"]),
   },
   mounted() {
     this.fetchSearchMovie();

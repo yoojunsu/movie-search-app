@@ -50,11 +50,11 @@ import { mapActions, mapMutations, mapState } from 'vuex'
 export default {
     name: "MainTopRated",
     computed: {
-        ...mapState('MovieModule',["TopRatedMovies","TopRatedGenre",]),
+        ...mapState("MainModule",["TopRatedMovies","TopRatedGenre",]),
     },
     methods: {
-        ...mapMutations('MovieModule',["setTopRatedGenre","setMovieType"]),
-        ...mapActions('MovieModule', ["fetchTopRatedGenreUpdate"]),
+        ...mapMutations("MainModule",["setTopRatedGenre","setMovieType"]),
+        ...mapActions("MainModule", ["fetchTopRatedGenreUpdate"]),
 
         //메인 리스트 장르 바꾸는 기능
         async changeMovieGenre(genre,movieType) {

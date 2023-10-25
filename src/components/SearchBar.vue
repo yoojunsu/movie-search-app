@@ -23,7 +23,7 @@ import { mapState } from 'vuex'
 export default {
     name: "SearchBar",
     computed: {
-        ...mapState('MovieModule',['SearchQuery']),
+        ...mapState("MainModule",['SearchQuery']),
     }
 }
 </script>

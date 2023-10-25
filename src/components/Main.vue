@@ -27,7 +27,7 @@ export default {
     MainTopRated,
   },
   methods: {
-    ...mapActions('MovieModule',["fetchMainMovies"]),
+    ...mapActions("MainModule",["fetchMainMovies"]),
   },
   async created() {
     //Main 컴포넌트 컨텐츠 세팅 데이터 fetch
