@@ -78,7 +78,7 @@ const actions = {
                 },
             });
 
-            const popularResponse = await axios.get(`${apiUrl}/movie/popular`, {
+            const popularResponse = await axios.get(`${apiUrl}/${state.PopularGenre}/popular`, {
                 params: {
                     api_key: key,
                     page: "1",
@@ -86,7 +86,7 @@ const actions = {
                 },
             });
 
-            const topRatedResponse = await axios.get(`${apiUrl}/movie/top_rated`, {
+            const topRatedResponse = await axios.get(`${apiUrl}/${state.TopRatedGenre}/top_rated`, {
                 params: {
                     api_key: key,
                     page: "1",
@@ -94,7 +94,7 @@ const actions = {
                 },
             });
 
-            const trendingResponse = await axios.get(`${apiUrl}/trending/person/week`,{
+            const trendingResponse = await axios.get(`${apiUrl}/person/popular`,{
                 params: {
                     api_key: key,
                     page: "1",

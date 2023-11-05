@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
 // 컴포넌트 import
 import SearchBar from "./components/SearchBar.vue";
 import Loading from "./components/Loading.vue";
@@ -17,15 +16,6 @@ export default {
   components: {
     SearchBar,
     Loading,
-  },
-  computed: {
-    ...mapState("MainModule", ["IsLoading"]),
-  },
-  methods: {
-    ...mapActions("MainModule", ["fetchSearchMovie"]),
-  },
-  mounted() {
-    this.fetchSearchMovie();
   },
 };
 </script>

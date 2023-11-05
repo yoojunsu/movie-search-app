@@ -14,26 +14,28 @@
                     class="card"
                     v-for="(popularMovie, i) in PopularMovies"
                     :key="i">
-                        <div class="poster-wrap">
-                            <img
-                                :src="`https://www.themoviedb.org/t/p/w440_and_h660_face${popularMovie.poster_path}`"
-                                alt=""
-                            />
+                        <router-link :to="`/detail/${PopularGenre}/${popularMovie.id}`">
+                            <div class="poster-wrap">
+                                <img
+                                    :src="`https://www.themoviedb.org/t/p/w440_and_h660_face${popularMovie.poster_path}`"
+                                    alt=""
+                                />
 
-                            <div class="vote-wrap">
-                                <b>
-                                {{ popularMovie.vote_average }}
-                                </b>
+                                <div class="vote-wrap">
+                                    <b>
+                                    {{ popularMovie.vote_average }}
+                                    </b>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-wrap">
-                            <h4>
-                                {{ (!popularMovie.title) ? popularMovie.name : popularMovie.title }}
-                            </h4>
-                            <span>
-                                {{ (popularMovie.release_date) ? popularMovie.release_date : popularMovie.first_air_date }}
-                            </span>
-                        </div>
+                            <div class="info-wrap">
+                                <h4>
+                                    {{ (!popularMovie.title) ? popularMovie.name : popularMovie.title }}
+                                </h4>
+                                <span>
+                                    {{ (popularMovie.release_date) ? popularMovie.release_date : popularMovie.first_air_date }}
+                                </span>
+                            </div>
+                        </router-link>
                     </li>
                 </ul>
             </div>

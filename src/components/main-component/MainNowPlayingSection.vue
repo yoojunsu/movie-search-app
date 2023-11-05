@@ -10,26 +10,28 @@
                             class="card"
                             v-for="(nowPlayingMovie, i) in NowPlayingMovies"
                             :key="i">
-                            <div class="poster-wrap">
-                                <img
-                                :src="`https://www.themoviedb.org/t/p/w440_and_h660_face${nowPlayingMovie.poster_path}`"
-                                alt=""/>
+                            <router-link :to="`/detail/movie/${nowPlayingMovie.id}`">
+                                <div class="poster-wrap">
+                                    <img
+                                    :src="`https://www.themoviedb.org/t/p/w440_and_h660_face${nowPlayingMovie.poster_path}`"
+                                    alt=""/>
 
-                                <div class="vote-wrap">
-                                    <b>
-                                        {{ nowPlayingMovie.vote_average }}
-                                    </b>
+                                    <div class="vote-wrap">
+                                        <b>
+                                            {{ nowPlayingMovie.vote_average }}
+                                        </b>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="info-wrap">
-                                <h4>
-                                    {{ nowPlayingMovie.title }}
-                                </h4>
-                                <span>
-                                    {{ nowPlayingMovie.release_date }}
-                                </span>
-                            </div>
+                                <div class="info-wrap">
+                                    <h4>
+                                        {{ nowPlayingMovie.title }}
+                                    </h4>
+                                    <span>
+                                        {{ nowPlayingMovie.release_date }}
+                                    </span>
+                                </div>
+                            </router-link>
                         </li>
                     </ul>
                 </div>

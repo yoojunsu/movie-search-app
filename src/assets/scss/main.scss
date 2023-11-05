@@ -260,10 +260,13 @@
     margin-top: 35px;
 
     .trending-people {
-      display: flex;
-      align-items: center;
-      gap: 0 10px;
       overflow: hidden;
+      
+      & > a {
+        display: flex;
+        align-items: center;
+        gap: 0 10px;
+      }
 
         .profile-wrap {
           width: 100px;

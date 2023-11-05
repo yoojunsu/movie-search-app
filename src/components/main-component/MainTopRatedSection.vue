@@ -15,26 +15,28 @@
                     class="card"
                     v-for="(topRatedMovie, i) in TopRatedMovies"
                     :key="i">
-                        <div class="poster-wrap">
-                            <img
-                                :src="`https://www.themoviedb.org/t/p/w440_and_h660_face${topRatedMovie.poster_path}`"
-                                alt=""
-                            />
+                        <router-link :to="`/detail/${TopRatedGenre}/${topRatedMovie.id}`">
+                            <div class="poster-wrap">
+                                <img
+                                    :src="`https://www.themoviedb.org/t/p/w440_and_h660_face${topRatedMovie.poster_path}`"
+                                    alt=""
+                                />
 
-                            <div class="vote-wrap">
-                                <b>
-                                {{ topRatedMovie.vote_average }}
-                                </b>
+                                <div class="vote-wrap">
+                                    <b>
+                                    {{ topRatedMovie.vote_average }}
+                                    </b>
+                                </div>
                             </div>
-                        </div>
-                        <div class="info-wrap">
-                            <h4>
-                                {{ (!topRatedMovie.title) ? topRatedMovie.name : topRatedMovie.title }}
-                            </h4>
-                            <span>
-                                {{ (!topRatedMovie.release_date) ? topRatedMovie.first_air_date : topRatedMovie.release_date }}
-                            </span>
-                        </div>
+                            <div class="info-wrap">
+                                <h4>
+                                    {{ (!topRatedMovie.title) ? topRatedMovie.name : topRatedMovie.title }}
+                                </h4>
+                                <span>
+                                    {{ (!topRatedMovie.release_date) ? topRatedMovie.first_air_date : topRatedMovie.release_date }}
+                                </span>
+                            </div>
+                        </router-link>
                     </li>
                     
                 </ul>
