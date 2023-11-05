@@ -8,8 +8,8 @@
             </h1>
         </router-link>
 
-        <div class="search-wrap" v-if="!$route.href === '/'">
-            <input type="text" v-model="SearchQuery" />
+        <div class="search-wrap" v-if="$route.path !== '/'">
+            <input type="text"/>
             <button type="button">
                 <i class="xi-search"></i>
             </button>
@@ -19,12 +19,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
     name: "SearchBar",
-    computed: {
-        ...mapState("MainModule",['SearchQuery']),
-    }
 }
 </script>
 

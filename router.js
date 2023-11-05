@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Main from "@/components/Main.vue";
 import Movies from "@/components/Movies.vue";
 import MovieDetail from "@/components/MovieDetail.vue";
+import PeopleDetail from "@/components/PeopleDetail.vue";
 import Bookmark from "@/components/Bookmark.vue";
 
 const routes = [
@@ -16,12 +17,14 @@ const routes = [
         component: Movies,
     },
     {
-        name: "movie-detail",
-        path: "/detail",
+        name: "detail",
+        path: "/detail/:genre/:id",
         component: MovieDetail,
-        query: {
-            id: "",
-        }
+    },
+    {
+        name: "people-detail",
+        path: "/detail/people/:id",
+        component: PeopleDetail,
     },
     {
         name: "bookmark",
